@@ -13,9 +13,9 @@ if [ -n "$answer" ]; then
     before="	url = https://github.com/"
     after="		url = https://${username}:${password}@github.com/"
     cp ".git/config" ".git/config.BAK"
-    rm ".git/config"
     #sed -e "s%$before%$after%" > ".git/config"
     sed -e "s%$before%$after%" ".git/config"
+    rm ".git/config"
     git push origin
 fi
 
