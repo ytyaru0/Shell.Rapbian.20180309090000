@@ -1,5 +1,5 @@
 username=ytyaru0
-echo "$username/$(basename $(cd $(dirname $0)))"
+echo "$username/$(basename $(cd $(dirname $0); pwd))"
 echo "--------------------"
 [ ! -d ".git" ] && git init
 git add -n .
