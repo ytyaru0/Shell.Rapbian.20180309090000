@@ -9,7 +9,7 @@ read answer
 if [ -n "$answer" ]; then
     git add .
     git commit -m "$answer"
-    password=`bash ./get_password $username`
+    password=`bash ./get_password.sh $username`
     before="	url = https://github.com/"
     after="		url = https://${username}:${password}@github.com/"
     cp ".git/config" ".git/config.BAK"
