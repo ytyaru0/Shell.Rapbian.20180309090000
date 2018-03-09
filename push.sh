@@ -8,8 +8,8 @@ echo 上記でいいならcommit message入力。ダメならEnterキー押下�
 read answer
 if [ -n "$answer" ]; then
     pass_mail=(`bash ./get_password.sh $username`)
-    password=${#pass_mail[0]}
-    mailaddr=${#pass_mail[1]}
+    password=${pass_mail[0]}
+    mailaddr=${pass_mail[1]}
     git config --local user.name $username
     git config --local user.email "$mailaddr"
     git add .

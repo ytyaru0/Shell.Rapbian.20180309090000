@@ -1,5 +1,4 @@
 username=$1
-#username=ytyaru0
 db_file=~/root/script/py/GitHub.Uploader.Pi3.Https.201802210700/res/db/GitHub.Accounts.sqlite3
 
 sql="select Password, MailAddress from Accounts where Username='$username';"
