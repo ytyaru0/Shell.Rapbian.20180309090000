@@ -9,10 +9,12 @@ read answer
 if [ -n "$answer" ]; then
     git add .
     git commit -m "$answer"
-    password=`bash meta_get_password $username`
+    password=`bash get_password $username`
     before="	url = https://github.com/"
     after="		url = https://${username}:${password}@github.com/"
-    sed -e "s/$before/$after/" ".git/config"
+    cp ".git/config" ".git/config.BAK"
+    rm ".git/config"
+    sed -e "s%$before%$after%" > ".git/config"
     git push origin
 fi
 
