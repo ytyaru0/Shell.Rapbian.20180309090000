@@ -12,10 +12,11 @@ if [ -n "$answer" ]; then
     password=`bash ./get_password.sh $username`
     before="	url = https://github.com/"
     after="		url = https://${username}:${password}@github.com/"
-    cp ".git/config" ".git/config.BAK"
-    sed -e "s%$before%$after%" > ".git/config"
+    config=".git/config"
+    cp "$config" "$config.BAK"
+    sed -e "s%$before%$after%" "$config.BAK" > "$config"
     #sed -e "s%$before%$after%" ".git/config"
-    rm ".git/config"
+    rm ".git/config.BAK"
     git push origin
 fi
 
