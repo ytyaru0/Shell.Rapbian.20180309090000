@@ -13,6 +13,8 @@ Path=(
 GetWorkDir () { echo "/tmp/work/"; }
 # 用途: settime.sh用一時ファイル配置など。
 GetWorkMetaDir () { echo `GetWorkDir`".meta/"; }
+# 用途: スクリーンショット画像を配置する
+GetScreenShotDir () { echo `GetWorkDir`"SS/"; }
 # 用途: ユーザが管理するディレクトリのルート
 GetRootDir () { echo "$HOME/root/"; }
 GetShellScriptDir () { echo `GetRootDir`"script/sh/"; }
