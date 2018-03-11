@@ -1,21 +1,19 @@
-# 目的: パスが変更されたとき、ここを変更することでほかのファイルも一括して変更できる
+# 目的: ユーザディレクトリのパス管理。パスを変更するとき、ここを変更することで他のシェルも一括変更できる
+declare -A Path;
+Path=(
+    ["Work"]="/tmp/work/"
+    ["WorkMeta"]="/tmp/work/.meta/"
+    ["SS"]="/tmp/work/SS/"
+    ["Root"]="$HOME/root/"
+    ["ShellScript"]="$HOME/root/script/sh/"
+)
+# for p in ${!Path[@]}; do { printf "%12s" "$p"; echo ": ${Path[$p]}"; } done
 
 # 用途: 作業ファイル一式を配置する。（RAMディスクにする。Raspbianにおいて書込によるSDカード劣化防止対策）
-function GetWorkDir () {
-    echo "/tmp/work/"
-}
+GetWorkDir () { echo "/tmp/work/"; }
 # 用途: settime.sh用一時ファイル配置など。
-function GetWorkMetaDir () {
-    echo `GetWorkDir`".meta/"
-}
-# 用途: _userlib/が参照しうるルートディレクトリ
-function GetRootDir () {
-    echo "$HOME/root/"
-    #echo `eval "~/root/"` # ~/root/ だと展開されない。 eval, bash -c だと「ディレクトリです」と怒られる 
-    #echo "/tmp/work/Shell.Rapbian.20180308095717/src/"
-}
-function GetShellScriptDir () {
-    echo `GetRootDir`"script/sh/"
-    #echo `GetRootDir`
-}
+GetWorkMetaDir () { echo `GetWorkDir`".meta/"; }
+# 用途: ユーザが管理するディレクトリのルート
+GetRootDir () { echo "$HOME/root/"; }
+GetShellScriptDir () { echo `GetRootDir`"script/sh/"; }
 
