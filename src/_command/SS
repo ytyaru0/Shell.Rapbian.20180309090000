@@ -15,7 +15,8 @@ function SS ()  {
     local size_source_unit=`python3 ~/root/script/py/os/file/Size.py $size_source`
     echo "${Path[SS]}"
     echo -e `Color 'Y'`"$timestamp$ext" `Color 'BG'`"    "$size_source_unit
-    for q in 0 1 5 10 20 100; do
+#    for q in 0 1 5 10 20 100; do
+    for q in 100; do
         local qual3=`printf "%03d" $q`
         local filename=$timestamp"_"$qual3$ext
         local o_file=`Join ${Path[SS]} "$filename"`
@@ -29,5 +30,7 @@ function SS ()  {
         echo -e -n `Color 'BG'`$size_unit`Color`" "
         echo -e `Color 'BR'`$rate`Color`'%'
     done
+
+    rm $filepath
 }
 SS
