@@ -2,6 +2,7 @@
 import math
 from decimal import Decimal, ROUND_DOWN
 
+# Raspbianにshのbcコマンドがなかったので作った
 class Rate:
     def Get(self, before:int, after:int) -> Decimal:
         return Decimal((1 - (after / before))*-1*100).quantize(Decimal('100.01'), rounding=ROUND_DOWN)
