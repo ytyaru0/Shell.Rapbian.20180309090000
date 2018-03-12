@@ -3,9 +3,8 @@ function SS ()  {
     . ~/root/script/sh/_lib/path.sh
     . ~/root/script/sh/_userlib/path.sh
     . ~/root/script/sh/_lib/file.sh
-    . ~/root/script/sh/color/ANSI_escape_code/ansi.sh
-    . ~/root/script/sh/color/ANSI_escape_code/SGR_P.sh
-    . ~/root/script/sh/color/ANSI_escape_code/color8_define.sh
+    #. ~/root/script/sh/color/color.sh
+    . /tmp/work/Shell.Rapbian.20180309090000/src/color/color.sh
     local timestamp=`date '+%Y%m%d%H%M%S'`
     local ext=".png"
     local filepath=`Join ${Path[SS]} "$timestamp$ext"`
@@ -16,14 +15,25 @@ function SS ()  {
     echo "$filepath" $size_source "B"
     for q in 0 1 5 10 20 100
     do
-        local filename="${timestamp}_"`printf "%03d" $q`${ext}
+        local size3=`printf "%03d" $q`
+        local filename=$timestamp"_"$size3$ext
+#        local filename="${timestamp}_"`printf "%03d" $q`${ext}
+        
         local o_file=`Join ${Path[SS]} "$filename"`
         local i_file=`Join ${Path[SS]} "$timestamp$ext"`
         pngquant --strip --output "$o_file" --quality $q "$i_file"
         local size=`GetSize $o_file`
         local rate=`python3 /tmp/work/Shell.Rapbian.20180309090000/src/_command/Rate.py $size_source $size`
 #        echo "$filename" $size"B" $rate
-        echo -e `SGR $(Color8 ${COLORS[BB]})`"$filename" `SGR $(Color8 ${COLORS[BG]})`$size`SGR 0`"B" `SGR $(Color8 ${COLORS[BR]})`$rate`SGR 0`%
+#        echo -e -n "`Color "$filename" "BB"` "
+
+#        echo -e -n "`Color $timestamp 'Y'`"_"`Color $size3 'BY'``Color $ext 'Y'` "
+#        echo -e -n "`Color $size 'BG'``Color 'B'` "
+#        echo -e "`Color $rate 'BR'``Color '%'`"
+
+        echo -e -n `Color 'Y'`$timestamp"_"`Color 'BY'`$size3`Color 'Y'`$ext" "
+        echo -e -n `Color 'BG'`$size`Color`"B "
+        echo -e `Color 'BR'`$rate`Color`'%'
     done
 }
 SS
