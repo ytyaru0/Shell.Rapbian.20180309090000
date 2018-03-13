@@ -30,7 +30,6 @@ MakeWorkMetaFile () {
         local without_ext=${filename%.*}
         local id=$without_ext
         local metafilepath=$(Join $(GetWorkMetaDir) '.'$id)
-        #echo $metafilepath
         if [ ! -f $metafilepath ]; then
             mkdir -p `GetWorkMetaDir`
             touch $metafilepath
