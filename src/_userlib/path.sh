@@ -19,3 +19,27 @@ GetScreenShotDir () { echo `GetWorkDir`"SS/"; }
 GetRootDir () { echo "$HOME/root/"; }
 GetShellScriptDir () { echo `GetRootDir`"script/sh/"; }
 
+# $1: ファイルパス
+# /tmp/work/.meta/に空ファイル作成（ファイル名を識別子として）
+MakeWorkMetaFile () {
+    # 末尾に.shがあれば (ユーザ処理は.shを仲介するようにするので.shだけで十分）
+    if [[ $1 =~ .sh ]] ; then
+        . "$HOME/root/script/sh/_userlib/path.sh"
+        . "$HOME/root/script/sh/_lib/path.sh"
+        local filename=`basename $1`
+        local without_ext=${filename%.*}
+        local id=$without_ext
+        local metafilepath=$(Join $(GetWorkMetaDir) '.'$id)
+        #echo $metafilepath
+        if [ ! -f $metafilepath ]; then
+            mkdir -p `GetWorkMetaDir`
+            touch $metafilepath
+            # 初回のみファイルパスを返す
+            echo $metafilepath
+        fi
+        # 初回以降はパスを返さない
+    # エラー
+    else
+        exit 1
+    fi
+}
